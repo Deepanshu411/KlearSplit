@@ -7,7 +7,8 @@ import {
   findUserByIdDb,
   updateUserDb,
 } from "../db/user.db.js";
-import { generateRandomPassword } from "../utils/passwordGenerator.utils.js";
+import { generateRandomPassword } from "../utils/passwordGenerator.util.js";
+import { validatePassword, validateUser } from "../validations/user.validations.js";
 
 class UserService {
   static createUser = async (userData) => {
@@ -20,9 +21,12 @@ class UserService {
       throw validateUserPhone;
     }
 
+    validateUser(userData);
+
     const password = generateRandomPassword();
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
+    console.log(hashedPassword)
     userData.password = hashedPassword;
 
     const user = await createUserDb(userData);
@@ -35,6 +39,7 @@ class UserService {
   };
 
   static updateUser = async (user) => {
+    validatePassword(user.password);
     const updatedUser = await updateUserDb(user);
     return updatedUser;
   };
