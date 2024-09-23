@@ -1,0 +1,23 @@
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #1995AD;
+    }
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+}
+.form-outline .form-control {
+    box-shadow: none;
+    border: 1px solid #ced4da; /* Restore a regular border */
+}
+.form-outline {
+    border: none; /* Remove the special MDB outline */
+}
