@@ -9,8 +9,8 @@ import {
 } from "../db/user.db.js";
 import { generateRandomPassword } from "../utils/passwordGenerator.util.js";
 import {
-  validatePassword,
-  validateUser,
+  createUserValidation,
+  updateUserValidation,
 } from "../validations/user.validations.js";
 
 class UserService {
@@ -24,7 +24,7 @@ class UserService {
       throw validateUserPhone;
     }
 
-    validateUser(userData);
+    createUserValidation(userData);
 
     const password = generateRandomPassword();
     const salt = await bcrypt.genSalt();
@@ -42,8 +42,7 @@ class UserService {
   };
 
   static updateUser = async (user) => {
-    validateUser(user);
-    validatePassword(user.password);
+    updateUserValidation(user);
     const updatedUser = await updateUserDb(user);
     return updatedUser;
   };
