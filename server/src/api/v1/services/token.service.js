@@ -22,12 +22,16 @@ class TokenService {
     return { accessToken, refreshToken: refreshTokenValue };
   };
 
-  static setTokensInCookies = (res, accessToken, refreshToken) => {
-    res.cookie("accessToken", accessToken, {
-      httpOnly: true,
-      sameSite: "Strict",
-      maxAge: 15 * 60 * 1000,
-    });
+  static setAccessTokenInLocalStorage = (res, accessToken) => {
+    res.set("authorization", accessToken)
+  };
+
+  static setTokensInCookies = (res, refreshToken) => {
+    // res.cookie("accessToken", accessToken, {
+    //   httpOnly: true,
+    //   sameSite: "Strict",
+    //   maxAge: 15 * 60 * 1000,
+    // });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,

@@ -4,12 +4,6 @@
     }
 }
 
-@media (max-width: 465px) {
-    .gradient-form {
-        height: 100vh !important;
-    }
-}
-
 @media (max-width: 767px) {
     .gradient-form {
         height: 100vh !important;

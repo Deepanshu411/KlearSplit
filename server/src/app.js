@@ -1,5 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import "dotenv/config";
 
 import userRoutes from "./api/v1/routes/user.routes.js";
@@ -13,6 +14,7 @@ connectDatabase();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors())
 
 // auth route
 app.use("/api/v1/", authRoutes);

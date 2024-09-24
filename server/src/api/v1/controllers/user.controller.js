@@ -3,8 +3,9 @@ import UserService from "../services/user.service.js";
 export const createUserController = async (req, res) => {
   try {
     const { first_name, last_name, email, phone } = req.body;
+    console.log(email);
 
-    const user = await UserService.createUser({
+    const user = await UserService.createUser(res, {
       first_name,
       last_name,
       email,
@@ -13,7 +14,7 @@ export const createUserController = async (req, res) => {
 
     res.status(201).json(user);
   } catch (error) {
-    res.status(400).json({ error: error.errors[0].message });
+    res.status(400).json({ error: error.message });
   }
 };
 

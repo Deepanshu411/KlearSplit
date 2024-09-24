@@ -12,10 +12,13 @@ import {
   createUserValidation,
   updateUserValidation,
 } from "../validations/user.validations.js";
+import TokenService from "./token.service.js";
 
 class UserService {
-  static createUser = async (userData) => {
+  static createUser = async (res, userData) => {
+    console.log(userData , userData.email)
     const validateUserEmail = await checkUniqueFieldDb("email", userData.email);
+   
     if (validateUserEmail) {
       throw validateUserEmail;
     }
@@ -32,8 +35,15 @@ class UserService {
     console.log(hashedPassword);
     userData.password = hashedPassword;
 
+    
     const user = await createUserDb(userData);
-    return user;
+
+    const { accessToken, refreshToken } =
+      await TokenService.generateTokens(user);
+
+    const access_token = TokenService.setAccessTokenInLocalStorage(res, accessToken);
+    TokenService.setTokensInCookies(res, refreshToken);
+    return { ...user, access_token };
   };
 
   static findUserById = async (id) => {

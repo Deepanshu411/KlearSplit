@@ -16,7 +16,8 @@ class AuthService {
     const { accessToken, refreshToken } =
       await TokenService.generateTokens(user);
 
-    TokenService.setTokensInCookies(res, accessToken, refreshToken);
+    TokenService.setAccessTokenInLocalStorage(res, accessToken);
+    TokenService.setTokensInCookies(res, refreshToken);
     console.log("Access Token: ", accessToken);
     console.log("Refresh Token: ", refreshToken);
     return { userId: user.user_id };
