@@ -38,7 +38,7 @@
 Ensure you have the following installed on your system:
 - **Node.js** (v14 or later)
 - **PostgreSQL**
-- **Angular CLI** (for frontend development)
+- **Angular CLI** (v18 for frontend development)
 
 ### Cloning the Repository
 
